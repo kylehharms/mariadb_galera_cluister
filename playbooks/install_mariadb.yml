@@ -4,12 +4,17 @@
   vars:
     mysql_bind_address: "{{ ansible_host }}"
     mysql_server_id: "{{ inventory_hostname }}"
-    
+
   tasks:
     - name: Create MariaDB repo file
       template:
         src: mariadb.repo.j2
         dest: /etc/yum.repos.d/mariadb.repo
+
+    - name: Create MariaDB repo file
+      template:
+        src: mariadb_server.cnf.j2
+        dest: /etc/my.cnf.d/server.cnf
       
     - name: Update package cache
       dnf:
