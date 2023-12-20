@@ -1,0 +1,51 @@
+#
+# These groups are read by MariaDB server.
+# Use it for options that only the server (but not clients) should see
+#
+# See the examples of server my.cnf files in /usr/share/mysql/
+#
+
+# this is read by the standalone daemon and embedded servers
+[server]
+
+# this is only for the mysqld standalone daemon
+[mysqld]
+# Basic Settings
+innodb_autoinc_lock_mode=2
+
+[galera]
+# Galera Provider Configuration
+wsrep_on=ON
+wsrep_provider=/usr/lib64/galera-4/libgalera_smm.so
+bind-address=0.0.0.0
+
+# Galera Cluster Configuration
+wsrep_cluster_name="my_cluster"
+wsrep_cluster_address="gcomm://10.0.10.141,10.0.10.142,10.0.10.143"
+
+# Node Configuration
+wsrep_node_name="node2"
+wsrep_node_address="10.0.10.142"
+
+# SST Method
+wsrep_sst_method=rsync
+# Mandatory settings
+binlog_format=row
+default_storage_engine=InnoDB
+#
+# Optional setting
+#wsrep_slave_threads=1
+#innodb_flush_log_at_trx_commit=0
+
+# this is only for embedded server
+[embedded]
+
+# This group is only read by MariaDB servers, not by MySQL.
+# If you use the same .cnf file for MySQL and MariaDB,
+# you can put MariaDB-only options here
+[mariadb]
+
+# This group is only read by MariaDB-10.5 servers.
+# If you use the same .cnf file for MariaDB of different versions,
+# use this group for options that older servers don't understand
+[mariadb-10.5]

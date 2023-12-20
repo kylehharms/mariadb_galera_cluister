@@ -1,0 +1,31 @@
+- name: Install MariaDB on AlmaLinux 8
+  hosts: test_servers
+  become: true
+
+  tasks:
+    - name: Create MariaDB repo file
+      template:
+        src: mariadb.repo.j2
+        dest: /etc/yum.repos.d/mariadb.repo
+      
+    - name: Update package cache
+      dnf:
+        name: '*'
+        state: latest
+      become: true
+
+    - name: Install MariaDB server
+      dnf:
+        name: MariaDB-server
+        state: present
+      when: ansible_distribution == 'AlmaLinux'
+
+    - name: Start MariaDB service
+      service:
+        name: mariadb
+        state: started
+
+    - name: Enable MariaDB service at boot
+      service:
+        name: mariadb
+        enabled: yes
