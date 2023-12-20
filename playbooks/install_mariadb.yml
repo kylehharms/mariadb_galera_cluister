@@ -11,7 +11,7 @@
         src: mariadb.repo.j2
         dest: /etc/yum.repos.d/mariadb.repo
 
-    - name: Create MariaDB repo file
+    - name: Create Galera Configuration
       template:
         src: mariadb_server.cnf.j2
         dest: /etc/my.cnf.d/server.cnf
