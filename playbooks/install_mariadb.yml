@@ -37,3 +37,4 @@
       service:
         name: mariadb
         enabled: yes
+
