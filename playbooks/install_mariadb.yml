@@ -65,7 +65,11 @@
         state: enabled
         immediate: yes
 
-
+    - name: Reload firewalld
+      systemd:
+        name: firewalld
+        state: reloaded
+        
     - name: Start Galera Cluster on Node 1
       command: galera_new_cluster
       when: inventory_hostname == node1
