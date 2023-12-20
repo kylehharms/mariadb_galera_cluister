@@ -28,6 +28,43 @@
       template:
         src: mariadb_server.cnf.j2
         dest: /etc/my.cnf.d/server.cnf
+        
+    - name: Open port 3306 
+      firewalld:
+        port: 3306/tcp
+        permanent: yes
+        state: enabled
+        immediate: yes
+
+    - name: Open port 4568
+      firewalld:
+        port: 4568/tcp
+        permanent: yes
+        state: enabled
+        immediate: yes
+        
+    - name: Open port 4567
+      firewalld:
+        port: 4567/tcp
+        permanent: yes
+        state: enabled
+        immediate: yes
+
+    - name: Open port 4444
+      firewalld:
+        port: 4444/tcp
+        permanent: yes
+        state: enabled
+        immediate: yes
+
+
+    - name: Open port 4567 udp
+      firewalld:
+        port: 4567/udp
+        permanent: yes
+        state: enabled
+        immediate: yes
+
 
     - name: Start Galera Cluster on Node 1
       command: galera_new_cluster
