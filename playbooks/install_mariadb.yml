@@ -73,7 +73,7 @@
 
     - name: Wait for Galera Cluster Initialization
       wait_for:
-        timeout: 300  # Adjust timeout as needed
+        timeout: 20  # Adjust timeout as needed
       when: inventory_hostname == node1 and galera_result is succeeded
 
     - name: Start MySQL on other nodes
