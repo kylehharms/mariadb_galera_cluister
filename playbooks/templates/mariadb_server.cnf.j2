@@ -24,8 +24,8 @@ wsrep_cluster_name="my_cluster"
 wsrep_cluster_address="gcomm://10.0.10.141,10.0.10.142,10.0.10.143"
 
 # Node Configuration
-wsrep_node_name="node2"
-wsrep_node_address="10.0.10.142"
+wsrep_node_name="{{mysql_server_id}}"
+wsrep_node_address="{{ mysql_bind_address }}"
 
 # SST Method
 wsrep_sst_method=rsync

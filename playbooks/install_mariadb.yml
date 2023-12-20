@@ -1,7 +1,10 @@
 - name: Install MariaDB on AlmaLinux 8
   hosts: test_servers
   become: true
-
+  vars:
+    mysql_bind_address: "{{ ansible_host }}"
+    mysql_server_id: "{{ inventory_hostname }}"
+    
   tasks:
     - name: Create MariaDB repo file
       template:
