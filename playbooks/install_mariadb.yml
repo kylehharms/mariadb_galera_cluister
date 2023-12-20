@@ -29,7 +29,7 @@
         src: mariadb_server.cnf.j2
         dest: /etc/my.cnf.d/server.cnf
 
-   - name: Start Galera Cluster on Node 1
+    - name: Start Galera Cluster on Node 1
       command: galera_new_cluster
       when: inventory_hostname == '{{node1}}'
       register: galera_result
