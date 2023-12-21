@@ -18,7 +18,7 @@
     - name: Override variables for MySQL.
       set_fact:
         mysql_config_include_dir: /etc/my.cnf.d/
-        mysql_bind_address: '0.0.0.0'
+        mysql_bind_address: "{{ ansible_host }}"
         mysql_log_error: /var/lib/mysql/mysql/mysql.err
         mysql_pid_file: /var/lib/mysql/mysqld.pid
         mysql_socket: /var/lib/mysql/mysql.sock
