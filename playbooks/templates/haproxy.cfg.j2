@@ -54,6 +54,14 @@ defaults
     timeout check           10s
     maxconn                 3000
 
+listen webinterface
+    bind 0.0.0.0:8080
+    mode http
+    stats enable
+    stats uri /
+    stats realm Strictly\ Private
+    stats auth Username:Password
+
 # Load Balancing for Galera Cluster
 listen galera 
      bind {{ ansible_host }}:3306
