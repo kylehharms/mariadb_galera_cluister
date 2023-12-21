@@ -1,16 +1,13 @@
 - name: Secure MySQL Installation
-  hosts: galera_nodes
+  hosts: your_mysql_servers
   become: true
-
-  roles:
-    - geerlingguy.mysql
 
   tasks:
     - name: Update MySQL root password
       mysql_user:
         name: root
         password: "{{ mysql_root_password }}"
-        host: localhost
+        login_unix_socket: true
       become: true
 
     - name: Remove anonymous MySQL users
