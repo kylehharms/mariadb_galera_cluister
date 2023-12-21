@@ -1,5 +1,7 @@
-[test_servers]
+[galera_nodes]
 test-server-el8-1 ansible_host=10.0.10.141
 test-server-el8-2 ansible_host=10.0.10.142
 test-server-el8-3 ansible_host=10.0.10.143
 
+[haproxy]
+test-server-el8-4 ansible_host=10.0.10.144
