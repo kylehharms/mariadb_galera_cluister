@@ -24,12 +24,6 @@
     name: "haproxy"
     host: "{{ HAPROXY_IP }}"
     state: present
-
-- name: Remove test database
-  mysql_db:
-    name: test
-    host: "{{ NODE1_IP }}"
-    state: absent
   
 - name: Set MySQL Error Log Location
   ini_file:
