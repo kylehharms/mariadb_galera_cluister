@@ -21,6 +21,13 @@
       notify:
         - restart haproxy
 
+    - name: Open port 80
+      firewalld:
+        port: 80/tcp
+        permanent: yes
+        state: enabled
+        immediate: yes
+
   handlers:
     - name: restart haproxy
       service:
