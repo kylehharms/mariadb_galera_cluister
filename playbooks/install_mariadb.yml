@@ -5,7 +5,7 @@
   roles:
     - geerlingguy.mysql
   vars_files:
-    - path/to/mysql_vars.yml
+    - vars/vars.yml
 
   vars_prompt:
     - name: "mysql_root_password"
