@@ -5,4 +5,3 @@ mysql_install_client: false
 mysql_install_server: false
 restart_mysql: false
 mysql_error_log_path: "/var/lib/mysql/mysql.err"
-restart_mysql: false  
