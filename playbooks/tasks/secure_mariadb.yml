@@ -23,6 +23,15 @@
   mysql_db:
     name: test
     state: absent
+  
+- name: Set MySQL Error Log Location
+  mysql_config:
+    login_user: root
+    login_password: "{{ mysql_root_password }}"
+    dest: "{{ mysql_error_log_path }}"
+    section: mysqld
+    key: log_error
+    value: "{{ mysql_error_log_path }}"
 
 - name: Reload MySQL service
   service:
