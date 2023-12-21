@@ -5,7 +5,7 @@
     mysql_bind_address: "{{ ansible_host }}"
     mysql_server_id: "{{ inventory_hostname }}"
     node1: "test-server-el8-1"
- vars_prompt:
+  vars_prompt:
     - name: "mysql_root_password"
       prompt: "Enter the MySQL root password"
       private: yes
