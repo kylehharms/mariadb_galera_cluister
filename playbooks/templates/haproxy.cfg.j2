@@ -32,4 +32,4 @@ backend http_back
 backend default_backend_name
     mode http
     balance roundrobin
-    server default_server <NODE1_IP>:3306 check
+    server default_server {{ NODE1_IP }}:3306 check
