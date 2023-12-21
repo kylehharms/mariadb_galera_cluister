@@ -19,9 +19,9 @@
     - "{{ ansible_hostname }}"
     - 127.0.0.1
   
-- name: add haproxy user
+- name: Add HAproxy user
   mysql_user:
-    name: "haproxy"
+    name: "{{ HAPROXY_USER }}"
     host: "{{ HAPROXY_IP }}"
     state: present
   

@@ -8,6 +8,6 @@ haproxy ansible_host=10.0.10.144
 
 
 #The application server is the server we expect incoming connections to come from. 
-#This inventory item will not be connected to or used at beyond setting a variable for the haproxy whitelist.
+#This inventory item will not be connected to or used for any purpose beyond setting a variable for the haproxy whitelist.
 [application] 
 app_server ansible_host=10.0.10.169

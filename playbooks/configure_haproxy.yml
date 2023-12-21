@@ -5,8 +5,9 @@
   vars_files:
     - vars/vars.yml
   
+  #this is the password for the haproxy interface, available at the haproxy_ip:8080. The default username is `haproxy` but can be changed in vars.yml
   vars_prompt:
-    - name: "haproxy_password"
+    - name: "HAPROXY_PASSWORD"
       prompt: "Enter password for the haproxy user for use with the haproxy web interface"
       private: yes
 
