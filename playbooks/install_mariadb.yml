@@ -18,6 +18,7 @@
   pre_tasks:
     - import_tasks: tasks/install_mariadb.yml
     - import_tasks: tasks/configure_firewalld.yml
-  tasks:
-    - import_tasks: tasks/secure_mariadb.yml
     - import_tasks: tasks/start_galera_cluster.yml
+  tasks:
+      - import_tasks: tasks/secure_mariadb.yml
+
