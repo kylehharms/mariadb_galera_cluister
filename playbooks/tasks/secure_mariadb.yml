@@ -52,5 +52,7 @@
     name: mariadb
     state: restarted
   when: inventory_hostname == node1 and first_start is succeeded
-
+  
+- name: flush handlers
+  meta: flush_handlers
 
