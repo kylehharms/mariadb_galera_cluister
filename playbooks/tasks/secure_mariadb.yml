@@ -45,9 +45,10 @@
     name: mysql
     state: restarted
     when: inventory_hostname != node1
+    register: restart_result
 
 - name: Restart MySQL on node 1
   systemd:
     name: mysql
     state: restarted
-    when: inventory_hostname == node1
+    when: inventory_hostname == node1 and restart_result is succeeded
