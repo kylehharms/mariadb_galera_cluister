@@ -31,3 +31,15 @@
     section: mysqld
     option: log_error
     value: "{{ mysql_error_log_path }}"
+
+- name: Add !includedir to my.cnf
+  lineinfile:
+    path: /etc/my.cnf  # Adjust the path to your my.cnf file
+    line: '!includedir /etc/my.cnf.d/'
+    insertafter: '^\\[mysqld\\]'  # Add after [mysqld] section
+    state: present
+
+- name: Restart MySQL
+  systemd:
+    name: mysql
+    state: restarted
