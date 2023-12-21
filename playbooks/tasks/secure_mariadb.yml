@@ -26,6 +26,7 @@
     state: present
 
 - name: Remove test database
+  hosts: "{{ NODE1_NAME }}"
   mysql_db:
     name: test
     state: absent
