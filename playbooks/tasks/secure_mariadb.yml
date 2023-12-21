@@ -41,14 +41,14 @@
 
 # It's important to not restart the entire cluster at the same time. 
 - name: Restart MySQL on all other nodes
+  hosts: node1
   systemd:
     name: mysql
     state: restarted
-    when: inventory_hostname != node1
     register: restart_result
 
 - name: Restart MySQL on node 1
+  hosts: !node1
   systemd:
     name: mysql
     state: restarted
-    when: inventory_hostname == node1 and restart_result is succeeded
