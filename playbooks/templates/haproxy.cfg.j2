@@ -65,6 +65,7 @@ listen webinterface
 # Load Balancing for Galera Cluster
 listen galera 
      bind {{ ansible_host }}:3306
+     acl white_list src 127.0.0.1 {{ APP_SERVER_IP }}
      balance leastconn
      mode tcp
      option tcpka

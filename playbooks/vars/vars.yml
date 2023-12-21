@@ -1,10 +1,11 @@
 
 #Node variables
 NODE1_NAME: "test-server-el8-1" #this should correspond to the name of the first galera node listed in the inventory file.
-NODE1_IP: "10.0.10.141"
-NODE2_IP: "10.0.10.142"
-NODE3_IP: "10.0.10.143"
-HAPROXY_IP: "10.0.10.144"
+NODE1_IP: "{{ hostvars['node1']['ansible_host'] }}"
+NODE2_IP: "{{ hostvars['node2']['ansible_host'] }}"
+NODE3_IP: "{{ hostvars['node3']['ansible_host'] }}"
+HAPROXY_IP: "{{ hostvars['haproxy']['ansible_host'] }}"
+APP_SERVER_IP: "10.0.10.169"
 
 #MySQL variables
 mysql_bind_address: "{{ ansible_host }}"
