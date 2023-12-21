@@ -38,6 +38,11 @@
         state: enabled
         immediate: yes
 
+    - name: Reload firewalld
+      systemd:
+        name: firewalld
+        state: reloaded
+
   handlers:
     - name: restart haproxy
       service:
