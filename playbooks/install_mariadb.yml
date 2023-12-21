@@ -24,5 +24,13 @@
         mysql_pid_file: /var/lib/mysql/mysqld.pid
         mysql_socket: /var/lib/mysql/mysql.sock
   tasks:
-      - import_tasks: tasks/secure_mariadb.yml
+    - import_tasks: tasks/secure_mariadb.yml
+    - name: Restart MySQL
+      systemd:
+        name: mariadb  # or mysql, depending on your distribution
+        state: restarted
+      when: restart_mysql | default(true)  # Add this line
+
+  vars:
+    restart_mysql: false 
 
