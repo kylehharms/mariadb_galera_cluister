@@ -23,9 +23,9 @@
       notify:
         - restart haproxy
 
-    - name: Open port 80
+    - name: Open port 3306
       firewalld:
-        port: 80/tcp
+        port: 3306/tcp
         permanent: yes
         state: enabled
         immediate: yes
