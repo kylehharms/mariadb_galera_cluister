@@ -1,7 +1,14 @@
+
+#Node variables
+NODE1_NAME: "test-server-el8-1" #this should correspond to the name of the first galera node listed in the inventory file.
+NODE1_IP: "10.0.10.141"
+NODE2_IP: "10.0.10.142"
+NODE3_IP: "10.0.10.143"
+
+#MySQL variables
 mysql_bind_address: "{{ ansible_host }}"
 mysql_server_id: "{{ inventory_hostname }}"
-node1: "test-server-el8-1"
+mysql_error_log_path: "/var/lib/mysql/mysql.err"
 mysql_install_client: false
 mysql_install_server: false
 restart_mysql: false
-mysql_error_log_path: "/var/lib/mysql/mysql.err"

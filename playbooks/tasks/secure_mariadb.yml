@@ -31,9 +31,10 @@
     option: log_error
     value: "{{ mysql_error_log_path }}"
 
+#ensures that the server is loading the server.cnf file under /etc/my.cnf.d/ directory
 - name: Add !includedir to my.cnf
   lineinfile:
-    path: /etc/my.cnf  # Adjust the path to your my.cnf file
+    path: /etc/my.cnf  
     line: '!includedir /etc/my.cnf.d/'
     insertafter: '^\\[mysqld\\]'  # Add after [mysqld] section
     state: present
