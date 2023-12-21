@@ -60,7 +60,7 @@ listen webinterface
     stats enable
     stats uri /
     stats realm Strictly\ Private
-    stats auth Username:Password
+    stats auth haproxy:{{ haproxy_user_password }}
 
 # Load Balancing for Galera Cluster
 listen galera 

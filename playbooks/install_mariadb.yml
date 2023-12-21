@@ -11,6 +11,11 @@
     - name: "mysql_root_password"
       prompt: "Enter the MySQL root password"
       private: yes
+  
+  vars_prompt:
+    - name: "haproxy_user_password"
+      prompt: "Enter the haproxy mysql/gui password"
+      private: yes
 
   pre_tasks:
     - import_tasks: tasks/install_mariadb.yml
