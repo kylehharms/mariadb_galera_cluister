@@ -21,7 +21,7 @@ bind-address=0.0.0.0
 
 # Galera Cluster Configuration
 wsrep_cluster_name="my_cluster"
-wsrep_cluster_address="gcomm://10.0.10.141,10.0.10.142,10.0.10.143"
+wsrep_cluster_address="gcomm://{{ NODE1_IP}},{{ NODE2_IP }},{{ NODE3_IP }}"
 
 # Node Configuration
 wsrep_node_name="{{mysql_server_id}}"

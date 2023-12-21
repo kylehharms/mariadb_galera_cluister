@@ -5,7 +5,7 @@ NODE1_IP: "{{ hostvars['node1']['ansible_host'] }}"
 NODE2_IP: "{{ hostvars['node2']['ansible_host'] }}"
 NODE3_IP: "{{ hostvars['node3']['ansible_host'] }}"
 HAPROXY_IP: "{{ hostvars['haproxy']['ansible_host'] }}"
-APP_SERVER_IP: "10.0.10.169"
+APP_SERVER_IP: "{{ hostvars['app_server']['ansible_host'] }}"
 
 #MySQL variables
 mysql_bind_address: "{{ ansible_host }}"
