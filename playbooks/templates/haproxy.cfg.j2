@@ -57,7 +57,7 @@ defaults
 # Load Balancing for Galera Cluster
 listen galera 
      bind {{ ansible_host }}:3306
-     balance source
+     balance leastconn
      mode tcp
      option tcpka
      option mysql-check user haproxy
