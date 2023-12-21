@@ -1,5 +1,5 @@
 - name: Secure MySQL Installation
-  hosts: your_mysql_servers
+  hosts: galera_nodes
   become: true
 
   tasks:

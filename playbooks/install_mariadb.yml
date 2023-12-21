@@ -1,5 +1,5 @@
 - name: Install MariaDB on AlmaLinux 8
-  hosts: test_servers
+  hosts: galera_nodes
   become: true
   vars:
     mysql_bind_address: "{{ ansible_host }}"
