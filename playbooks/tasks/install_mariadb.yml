@@ -14,8 +14,3 @@
     name: MariaDB-server
     state: present
   when: ansible_distribution == 'AlmaLinux'
-
-- name: Create Galera Configuration
-  template:
-    src: mariadb_server.cnf.j2
-    dest: /etc/my.cnf.d/server.cnf

@@ -24,7 +24,6 @@
     name: test
     state: absent
   
-
 - name: Set MySQL Error Log Location
   ini_file:
     path: "/etc/my.cnf" 
@@ -38,21 +37,3 @@
     line: '!includedir /etc/my.cnf.d/'
     insertafter: '^\\[mysqld\\]'  # Add after [mysqld] section
     state: present
-
-# It's important to not restart the entire cluster at the same time. 
-- name: Restart MySQL on all other nodes
-  service:
-    name: mariadb
-    state: restarted
-  when: inventory_hostname != node1
-  register: first_start
-
-- name: Restart MySQL on node1
-  service:
-    name: mariadb
-    state: restarted
-  when: inventory_hostname == node1 and first_start is succeeded
-  
-- name: flush handlers
-  meta: flush_handlers
-

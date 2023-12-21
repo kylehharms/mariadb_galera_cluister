@@ -15,7 +15,6 @@
   pre_tasks:
     - import_tasks: tasks/install_mariadb.yml
     - import_tasks: tasks/configure_firewalld.yml
-    - import_tasks: tasks/start_galera_cluster.yml
     - name: Override variables for MySQL.
       set_fact:
         mysql_config_include_dir: /etc/my.cnf.d/
@@ -25,11 +24,7 @@
         mysql_socket: /var/lib/mysql/mysql.sock
   tasks:
     - import_tasks: tasks/secure_mariadb.yml
-    - name: Restart MySQL
-      systemd:
-        name: mariadb  # or mysql, depending on your distribution
-        state: restarted
-      when: restart_mysql | default(true)  # Add this line
+    - import_tasks: tasks/start_galera_cluster.yml
 
 
 

@@ -1,11 +1,24 @@
+- name: Create Galera Configuration
+  template:
+    src: mariadb_server.cnf.j2
+    dest: /etc/my.cnf.d/server.cnf
+
+- name: Stop MySQL on all nodes
+  service:
+    name: mariadb
+    state: stopped
+  when: inventory_hostname != node1
+  register: all_stop
+
+
 - name: Start Galera Cluster on Node 1
   command: galera_new_cluster
-  when: inventory_hostname == node1
+  when: inventory_hostname == node1 and all_stop is succeeded
   register: galera_result
 
 - name: Wait for Galera Cluster Initialization
   wait_for:
-    timeout: 20  # Adjust timeout as needed
+    timeout: 10  # Adjust timeout as needed
   when: inventory_hostname == node1 and galera_result is succeeded
 
 - name: Start MySQL on other nodes
