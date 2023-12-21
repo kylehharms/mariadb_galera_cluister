@@ -31,8 +31,3 @@
     section: mysqld
     option: log_error
     value: "{{ mysql_error_log_path }}"
-
-- name: Reload MySQL service
-  service:
-    name: mysql
-    state: reloaded
