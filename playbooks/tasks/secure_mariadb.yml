@@ -37,3 +37,16 @@
     line: '!includedir /etc/my.cnf.d/'
     insertafter: '^\\[mysqld\\]'  # Add after [mysqld] section
     state: present
+
+- name: node1 first boot #node 1 reboot
+  service:
+    name: mariadb
+    state: restarted
+  when: inventory_hostname == node1
+  register: first_boot
+
+- name: first boot of other nodes
+  services:
+    name: mariadb
+    start: restarted
+  when: inventory_hostname != node1 and first_boot is succeeded

@@ -7,7 +7,6 @@
   service:
     name: mariadb
     state: stopped
-  when: inventory_hostname != node1
   register: all_stop
 
 
