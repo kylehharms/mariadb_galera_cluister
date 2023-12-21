@@ -41,14 +41,15 @@
 
 # It's important to not restart the entire cluster at the same time. 
 - name: Restart MySQL on all other nodes
-  hosts: node1
-  systemd:
-    name: mysql
-    state: restarted
-    register: restart_result
+  service:
+    name: mariadb
+    state: started
+  when: inventory_hostname != node1
 
-- name: Restart MySQL on node 1
-  hosts: !node1
-  systemd:
-    name: mysql
-    state: restarted
+- name: Restart MySQL on node1
+  service:
+    name: mariadb
+    state: started
+  when: inventory_hostname == node1
+
+
