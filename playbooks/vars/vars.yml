@@ -3,4 +3,5 @@ mysql_server_id: "{{ inventory_hostname }}"
 node1: "test-server-el8-1"
 mysql_install_client: false
 mysql_install_server: false
+restart_mysql: false
 mysql_error_log_path: "/var/lib/mysql/mysql.err"
