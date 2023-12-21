@@ -7,12 +7,10 @@
   vars_files:
     - vars/vars.yml
 
-  vars_mysql_password:
+  vars_prompt:
     - name: "mysql_root_password"
       prompt: "Enter the MySQL root password"
       private: yes
-  
-  vars_haproxy_password:
     - name: "haproxy_user_password"
       prompt: "Enter the haproxy mysql/gui password"
       private: yes
