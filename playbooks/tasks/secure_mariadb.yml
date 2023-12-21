@@ -23,7 +23,7 @@
   mysql_user:
     name: "haproxy"
     password: "{{ haproxy_user_password }}"
-    host: "10.0.10.144"
+    host: "{{ HAPROXY_IP }}"
     state: present
 
 - name: Remove test database

@@ -4,6 +4,7 @@ NODE1_NAME: "test-server-el8-1" #this should correspond to the name of the first
 NODE1_IP: "10.0.10.141"
 NODE2_IP: "10.0.10.142"
 NODE3_IP: "10.0.10.143"
+HAPROXY_IP: "10.0.10.144"
 
 #MySQL variables
 mysql_bind_address: "{{ ansible_host }}"
