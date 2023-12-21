@@ -26,9 +26,9 @@
     state: present
 
 - name: Remove test database
-  hosts: "{{ NODE1_NAME }}"
   mysql_db:
     name: test
+    host: "{{ NODE1_IP }}"
     state: absent
   
 - name: Set MySQL Error Log Location
