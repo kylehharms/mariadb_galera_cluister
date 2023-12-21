@@ -4,11 +4,7 @@
   gather_facts: true
   vars_files:
     - vars/vars.yml
-  vars_prompt:
-    - name: "haproxy_user_password"
-      prompt: "Enter the haproxy mysql/gui password"
-      private: yes
-      
+
   tasks:
     - name: Update dnf repositories (for AlmaLinux)
       dnf:

@@ -22,7 +22,6 @@
 - name: add haproxy user
   mysql_user:
     name: "haproxy"
-    password: "{{ haproxy_user_password }}"
     host: "{{ HAPROXY_IP }}"
     state: present
 
