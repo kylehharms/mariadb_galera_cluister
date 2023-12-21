@@ -55,7 +55,8 @@ defaults
     maxconn                 3000
 
 # Load Balancing for Galera Cluster
-listen galera {{ ansible_host }}:3306
+listen galera 
+     bind {{ ansible_host }}:3306
      balance source
      mode tcp
      option tcpka
