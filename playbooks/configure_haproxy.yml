@@ -11,6 +11,11 @@
         state: latest
       when: ansible_distribution == "AlmaLinux"
 
+  vars_prompt:
+    - name: "haproxy_user_password"
+      prompt: "Enter the haproxy mysql/gui password"
+      private: yes
+
     - name: Install HAProxy
       dnf:
         name: haproxy
