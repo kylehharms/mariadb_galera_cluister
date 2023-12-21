@@ -8,6 +8,6 @@
 
   tasks:
     - import_tasks: tasks/install_mariadb.yml
-    - import_tasks: tasks/secure_mariadb
+    - import_tasks: tasks/secure_mariadb.yml
     - import_tasks: tasks/configure_firewalld.yml
     - import_tasks: tasks/start_galera_cluster.yml
