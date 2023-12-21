@@ -46,7 +46,7 @@
   register: first_boot
 
 - name: first boot of other nodes
-  services:
+  service:
     name: mariadb
     start: restarted
   when: inventory_hostname != node1 and first_boot is succeeded
