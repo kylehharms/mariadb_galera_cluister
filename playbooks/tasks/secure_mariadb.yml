@@ -22,7 +22,7 @@
 - name: add haproxy user
   mysql_user:
     name: "haproxy"
-    host: "{{ item }}"
+    host: "10.0.10.144"
     state: present
   with_items:
     - localhost
