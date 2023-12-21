@@ -15,7 +15,6 @@
   pre_tasks:
     - import_tasks: tasks/install_mariadb.yml
     - import_tasks: tasks/configure_firewalld.yml
-    - import_tasks: tasks/start_galera_cluster.yml
 
     - name: Override variables for MySQL.
       set_fact:
@@ -25,3 +24,4 @@
         mysql_socket: /var/lib/mysql/mysql.sock
   tasks:
     - import_tasks: tasks/secure_mariadb.yml
+    - import_tasks: tasks/start_galera_cluster.yml
