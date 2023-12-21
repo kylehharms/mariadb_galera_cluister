@@ -3,5 +3,5 @@ node1 ansible_host=10.0.10.141
 node2 ansible_host=10.0.10.142
 node3 ansible_host=10.0.10.143
 
-[haproxy]
+[haproxy_group]
 haproxy ansible_host=10.0.10.144
