@@ -24,13 +24,13 @@
     name: test
     state: absent
   
+
 - name: Set MySQL Error Log Location
-   - name: Set MySQL Error Log Location
-      ini_file:
-        path: "/etc/my.cnf" 
-        section: mysqld
-        option: log_error
-        value: "{{ mysql_error_log_path }}"
+  ini_file:
+    path: "/etc/my.cnf" 
+    section: mysqld
+    option: log_error
+    value: "{{ mysql_error_log_path }}"
 
 - name: Reload MySQL service
   service:
