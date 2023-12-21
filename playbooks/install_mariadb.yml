@@ -1,6 +1,9 @@
 - name: Install MariaDB on AlmaLinux 8
   hosts: galera_nodes
   become: true
+  #needed for securing mysql without worrying about installing python on the target node
+  roles:
+    - geerlingguy.mysql
   vars:
     mysql_bind_address: "{{ ansible_host }}"
     mysql_server_id: "{{ inventory_hostname }}"
