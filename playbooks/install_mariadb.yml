@@ -31,6 +31,5 @@
         state: restarted
       when: restart_mysql | default(true)  # Add this line
 
-  vars:
-    restart_mysql: false 
+
 
