@@ -26,6 +26,3 @@
         mysql_socket: /var/lib/mysql/mysql.sock
   tasks:
     - import_tasks: tasks/secure_mariadb.yml
-
-
-
