@@ -25,7 +25,7 @@ wsrep_cluster_address="gcomm://{{ NODE1_IP}},{{ NODE2_IP }},{{ NODE3_IP }}"
 
 # Node Configuration
 wsrep_node_name="{{mysql_server_id}}"
-wsrep_node_address="{{ mysql_bind_address }}"
+wsrep_node_address="{{ ansible_host }}"
 
 # SST Method
 wsrep_sst_method=rsync
