@@ -36,22 +36,22 @@ global
 # common defaults that all the 'listen' and 'backend' sections will
 # use if not designated in their block
 #---------------------------------------------------------------------
-defaults
-    mode                    http
-    log                     global
-    option                  dontlognull
-    option http-server-close
-    option forwardfor       except 127.0.0.0/8
-    option                  redispatch
-    retries                 3
-    timeout http-request    10s
-    timeout queue           1m
-    timeout connect         10s
-    timeout client          1m
-    timeout server          1m
-    timeout http-keep-alive 10s
-    timeout check           10s
-    maxconn                 3000
+#defaults
+#    mode                    http
+#    log                     global
+#    option                  dontlognull
+#    option http-server-close
+#    option forwardfor       except 127.0.0.0/8
+#    option                  redispatch
+#    retries                 3
+#    timeout http-request    10s
+#    timeout queue           1m
+#    timeout connect         10s
+#    timeout client          1m
+#    timeout server          1m
+#    timeout http-keep-alive 10s
+#    timeout check           10s
+#    maxconn                 3000
 
 listen webinterface
     bind 0.0.0.0:8080
@@ -68,6 +68,7 @@ listen galera
      tcp-request content accept if white_list
      tcp-request content reject
      balance leastconn
+     maxconn 1000
      mode tcp
      option tcpka
      option mysql-check user haproxy
