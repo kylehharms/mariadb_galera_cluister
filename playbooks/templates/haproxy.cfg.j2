@@ -63,7 +63,7 @@ listen webinterface
 
 # Load Balancing for Galera Cluster
 listen galera 
-     #bind {{ HAPROXY_IP }}:3306
+     bind {{ ansible_host }}:3306
      acl white_list src 127.0.0.1 {{ APP_SERVER_IP }}
      tcp-request content accept if white_list
      tcp-request content reject
