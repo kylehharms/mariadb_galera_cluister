@@ -1,5 +1,5 @@
 
-#Node variables
+#Node variables (CHANGE IPS IN INVENTORY)
 NODE1_NAME: "node1"
 NODE1_IP: "{{ hostvars['node1']['ansible_host'] }}"
 NODE2_IP: "{{ hostvars['node2']['ansible_host'] }}"

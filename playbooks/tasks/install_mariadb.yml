@@ -1,3 +1,4 @@
+
 - name: Create MariaDB repo file
   template:
     src: mariadb.repo.j2
