@@ -26,4 +26,4 @@
     - import_tasks: tasks/start_galera_cluster.yml
 
   handlers:
-    - import_tasks: /handlers/main.yml
+    - import_tasks: handlers/main.yml
