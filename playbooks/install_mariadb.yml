@@ -1,7 +1,6 @@
 - name: Install MariaDB on AlmaLinux 8
   hosts: galera_nodes
   become: true
-  #needed for securing mysql without worrying about installing python on the target node
   roles:
     - geerlingguy.mysql
   vars_files:
@@ -27,7 +26,4 @@
     - import_tasks: tasks/start_galera_cluster.yml
 
   handlers:
-    - name: restart mysql
-      ansible.builtin.service:
-      name: "{{ mysql_daemon }}"
-      state: started
+    - import_tasks: /handlers/main.yml
