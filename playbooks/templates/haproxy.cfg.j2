@@ -37,12 +37,12 @@ global
 # use if not designated in their block
 #---------------------------------------------------------------------
 defaults
-    mode                    http
-    log                     global
-    option                  dontlognull
-    option http-server-close
+#    mode                    http
+#    log                     global
+#    option                  dontlognull
+#    option http-server-close
 #    option forwardfor       except 127.0.0.0/8
-    option                  redispatch
+#    option                  redispatch
     retries                 3
     timeout http-request    10s
     timeout queue           1m
@@ -51,7 +51,7 @@ defaults
     timeout server          1m
     timeout http-keep-alive 10s
     timeout check           10s
-    maxconn                 3000
+#    maxconn                 3000
 
 listen webinterface
     bind 0.0.0.0:8080
@@ -62,12 +62,7 @@ listen webinterface
     stats auth {{ HAPROXY_USER }}:{{ HAPROXY_PASSWORD }}
 
 # Load Balancing for Galera Cluster
-frontend galera_frontend
-  bind {{ HAPROXY_IP }}:3306
-  mode tcp
-  default_backend galera_nodes
-
-backend backend galera_nodes
+listen galera 
      bind {{ HAPROXY_IP }}:3306
      acl white_list src 127.0.0.1 {{ APP_SERVER_IP }}
      tcp-request content accept if white_list
