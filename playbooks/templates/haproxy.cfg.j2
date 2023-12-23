@@ -68,7 +68,6 @@ listen galera
      tcp-request content accept if white_list
      tcp-request content reject
      balance leastconn
-     maxconn 1000
      mode tcp
      option tcpka
      option mysql-check user haproxy
