@@ -62,7 +62,12 @@ listen webinterface
     stats auth {{ HAPROXY_USER }}:{{ HAPROXY_PASSWORD }}
 
 # Load Balancing for Galera Cluster
-listen galera 
+frontend galera_frontend
+  bind {{ HAPROXY_IP }}:3306
+  mode tcp
+  default_backend galera_nodes
+
+backend backend galera_nodes
      bind {{ HAPROXY_IP }}:3306
      acl white_list src 127.0.0.1 {{ APP_SERVER_IP }}
      tcp-request content accept if white_list
