@@ -62,14 +62,15 @@ listen webinterface
     stats auth {{ HAPROXY_USER }}:{{ HAPROXY_PASSWORD }}
 
 # Load Balancing for Galera Cluster
-listen galera {{ ansible_host }}:3306
-     acl white_list src 127.0.0.1 {{ APP_SERVER_IP }}
-     tcp-request content accept if white_list
-     tcp-request content reject
-     balance leastconn
-     mode tcp
-     option tcpka
-     option mysql-check user haproxy
-     server node1 {{ NODE1_IP }}:3306 check weight 1
-     server node2 {{ NODE2_IP }}:3306 check weight 1
-     server node3 {{ NODE2_IP }}:3306 check weight 1
+listen galera 
+    bind {{ ansible_host }}:3306
+    acl white_list src 127.0.0.1 {{ APP_SERVER_IP }}
+    tcp-request content accept if white_list
+    tcp-request content reject
+    balance leastconn
+    mode tcp
+    option tcpka
+    option mysql-check user haproxy
+    server node1 {{ NODE1_IP }}:3306 check weight 1
+    server node2 {{ NODE2_IP }}:3306 check weight 1
+    server node3 {{ NODE2_IP }}:3306 check weight 1
