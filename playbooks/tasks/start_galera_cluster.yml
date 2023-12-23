@@ -9,7 +9,6 @@
     state: stopped
   register: all_stop
 
-
 - name: Start Galera Cluster on Node 1
   command: galera_new_cluster
   when: inventory_hostname == NODE1_NAME and all_stop is succeeded
