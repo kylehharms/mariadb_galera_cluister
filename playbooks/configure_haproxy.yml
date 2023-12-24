@@ -48,6 +48,8 @@
       systemd:
         name: firewalld
         state: reloaded
+      notify:
+        - restart haproxy
 
   handlers:
     - name: restart haproxy
