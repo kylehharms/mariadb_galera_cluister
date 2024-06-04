@@ -1,4 +1,4 @@
-- name: restart mysql
+- name: Restart MariaDB
   ansible.builtin.service:
     name: "{{ mysql_daemon }}"
     state: started
