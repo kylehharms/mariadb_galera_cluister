@@ -1,54 +1,29 @@
----
-- name: Add MariaDB repository on Debian
-  apt_repository:
-    repo: 'deb [arch=amd64,arm64,ppc64el] http://mariadb.mirror.globo.tech/repo/10.6/ubuntu {{ ansible_distribution_release }} main'
-    state: present
-  when: ansible_os_family == "Debian"
+- name: Install MariaDB on AlmaLinux 8
+  hosts: galera_nodes
+  become: true
+  roles:
+    - geerlingguy.mysql
+  vars_files:
+    - vars/vars.yml
 
-- name: Add MariaDB repository key on Debian
-  apt_key:
-    url: 'https://mariadb.org/mariadb_release_signing_key.asc'
-    state: present
-  when: ansible_os_family == "Debian"
+  vars_prompt:
+    - name: "mysql_root_password"
+      prompt: "Enter the MySQL root password"
+      private: yes
 
-- name: Add MariaDB repository on RedHat
-  yum_repository:
-    name: MariaDB
-    description: "MariaDB Repository"
-    baseurl: 'http://yum.mariadb.org/10.6/centos{{ ansible_distribution_major_version }}-amd64'
-    gpgkey: 'https://mariadb.org/mariadb_release_signing_key.asc'
-    gpgcheck: yes
-    enabled: yes
-  when: ansible_os_family == "RedHat"
+  pre_tasks:
+    - import_tasks: tasks/install_mariadb.yml
+    - import_tasks: tasks/configure_firewalld.yml
 
-- name: Update apt cache on Debian
-  apt:
-    update_cache: yes
-  when: ansible_os_family == "Debian"
+    - name: Override variables for MySQL.
+      set_fact:
+        mysql_bind_address: "0.0.0.0"
+        mysql_log_error: /var/lib/mysql/mysql/mysql.err
+        mysql_pid_file: /var/lib/mysql/mysqld.pid
+        mysql_socket: /var/lib/mysql/mysql.sock
+  tasks:
+    - import_tasks: tasks/secure_mariadb.yml
+    - import_tasks: tasks/start_galera_cluster.yml
 
-- name: Install MariaDB server on Debian
-  apt:
-    name: mariadb-server
-    state: present
-  when: ansible_os_family == "Debian"
-
-- name: Install MariaDB server on RedHat
-  yum:
-    name: mariadb-server
-    state: present
-  when: ansible_os_family == "RedHat"
-
-- name: Copy MariaDB configuration file
-  template:
-    src: my.cnf.j2
-    dest: /etc/my.cnf
-    owner: root
-    group: root
-    mode: 0644
-  notify: Restart MariaDB
-
-- name: Ensure MariaDB is running and enabled
-  service:
-    name: mariadb
-    state: started
-    enabled: yes
+  handlers:
+    - import_tasks: handlers/main.yml
