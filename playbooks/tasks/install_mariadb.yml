@@ -45,10 +45,3 @@
     owner: root
     group: root
     mode: 0644
-  notify: Restart MariaDB
-
-- name: Ensure MariaDB is running and enabled
-  service:
-    name: mariadb
-    state: started
-    enabled: yes
