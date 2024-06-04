@@ -38,10 +38,3 @@
     state: present
   when: ansible_os_family == "RedHat"
 
-- name: Copy MariaDB configuration file
-  template:
-    src: ../templates/my.cnf.j2
-    dest: /etc/my.cnf
-    owner: root
-    group: root
-    mode: 0644
