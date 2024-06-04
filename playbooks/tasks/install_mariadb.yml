@@ -15,7 +15,7 @@
   yum_repository:
     name: MariaDB
     description: "MariaDB Repository"
-    baseurl: 'http://yum.mariadb.org/10.6/centos{{ ansible_distribution_major_version }}-amd64'
+    baseurl: 'http://yum.mariadb.org/10.6/rhel{{ ansible_distribution_major_version }}-amd64'
     gpgkey: 'https://mariadb.org/mariadb_release_signing_key.asc'
     gpgcheck: yes
     enabled: yes
