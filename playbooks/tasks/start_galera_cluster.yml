@@ -1,6 +1,6 @@
 - name: Create Galera Configuration
   template:
-    src: mariadb_server.cnf.j2
+    src: my.cnf.j2
     dest: /etc/my.cnf.d/server.cnf
 
 - name: Stop MySQL on all nodes
