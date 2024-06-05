@@ -1,8 +1,6 @@
 - name: Install MariaDB on AlmaLinux 8
   hosts: galera_nodes
   become: true
-  roles:
-    - geerlingguy.mysql
   vars_files:
     - vars/vars.yml
 
