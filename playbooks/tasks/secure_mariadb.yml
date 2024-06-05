@@ -39,3 +39,6 @@
     line: '!includedir /etc/my.cnf.d/'
     insertafter: '^\\[mysqld\\]'  # Add after [mysqld] section
     state: present
+
+- name: Ensure MySQL packages are installed.
+  
