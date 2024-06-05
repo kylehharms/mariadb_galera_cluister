@@ -11,6 +11,14 @@
     state: present
   when: ansible_os_family == "Debian"
 
+- name: Ensure /var/lib/mysql exists
+  ansible.builtin.file:
+    path: /var/lib/mysql
+    state: directory
+    mode: '0755'
+    owner: mysql
+    group: mysql
+
 - name: Add MariaDB repository on RedHat
   yum_repository:
     name: MariaDB
