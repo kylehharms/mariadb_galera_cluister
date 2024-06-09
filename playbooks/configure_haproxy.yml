@@ -9,7 +9,7 @@
   vars_prompt:
     - name: "HAPROXY_PASSWORD"
       prompt: "Enter password for the haproxy user for use with the haproxy web interface"
-      private: yes
+      private: true
 
   tasks:
     - name: Update dnf repositories (for AlmaLinux)
@@ -22,6 +22,10 @@
       dnf:
         name: haproxy
         state: present
+
+    - name: selinux allow haproxy
+      command: setsebool -P haproxy_connect_any 1
+      become: true
 
     - name: Configure HAProxy
       template:

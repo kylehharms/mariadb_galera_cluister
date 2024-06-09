@@ -74,6 +74,26 @@
     login_password: "{{ mysql_root_password }}"
   become: true
 
+- name: Create MySQL user with remote access
+  community.mysql.mysql_user:
+    name: "{{ mysql_user_name }}"
+    host: "%"
+    password: "{{ mysql_user_password }}"
+    priv: "*.*:ALL"
+    state: present
+    login_user: root
+    login_password: "{{ mysql_root_password }}"
+
+- name: Ensure MySQL user has required privileges
+  community.mysql.mysql_privs:
+    name: "{{ mysql_user_name }}"
+    host: "%"
+    priv: "*.*:ALL"
+    state: present
+    login_user: root
+    login_password: "{{ mysql_root_password }}"
+    login_host: localhost
+  
 - name: Set MySQL Error Log Location
   ini_file:
     path: "/etc/my.cnf" 

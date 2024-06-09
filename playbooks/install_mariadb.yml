@@ -4,12 +4,17 @@
   vars_files:
     - vars/vars.yml
 
+
   vars_prompt:
-    - name: "mysql_root_password"
-      prompt: "Enter the MySQL root password"
-      private: yes
+    - name: "mysql_user_password"
+      prompt: "Enter the MySQL password for {{ mysql_user_name }}"
+      private: true
 
   pre_tasks:
+    - name: Generate a random password for the MySQL user
+      set_fact:
+        mysql_root_password: "{{ lookup('password', '/dev/null length=16') }}"
+        
     - import_tasks: tasks/install_mariadb.yml
     - import_tasks: tasks/configure_firewalld.yml
 
