@@ -1,30 +1,79 @@
-- name: Update MySQL root password
+- name: Ensure MariaDB is running
+  systemd:
+    name: mariadb
+    state: started
+
+- name: Check if MariaDB root password is already set
+  shell: >
+    mysql -u root -p{{ mysql_root_password }} -e "SELECT 1"
+  register: mysql_root_password_check
+  ignore_errors: true
+  become: true
+
+- name: Set MariaDB root password (if not set)
+  command: >
+    mysqladmin -u root password '{{ mysql_root_password }}'
+  when: mysql_root_password_check.failed
+  become: true
+  no_log: true
+
+- name: Set MariaDB root password (if already set)
   mysql_user:
     name: root
-    password: "{{ mysql_root_password }}"
     host: localhost
-  become: true
-  with_items:
-    - localhost
-    - "{{ ansible_hostname }}"
-    - 127.0.0.1
+    password: "{{ mysql_root_password }}"
+    login_user: root
+    login_password: "{{ mysql_root_password }}"
+    state: present
+  when: not mysql_root_password_check.failed
+  no_log: true
 
-- name: Remove anonymous MySQL users
+- name: Remove anonymous users
   mysql_user:
-    name: ""
+    name: ''
+    host_all: yes
+    state: absent
+    login_user: root
+    login_password: "{{ mysql_root_password }}"
+  no_log: false
+
+- name: Disallow root login remotely
+  mysql_user:
+    name: root
     host: "{{ item }}"
     state: absent
+    login_user: root
+    login_password: "{{ mysql_root_password }}"
   with_items:
-    - localhost
-    - "{{ ansible_hostname }}"
-    - 127.0.0.1
-  
+    - "{{ ansible_facts['fqdn'] }}"
+    - '127.0.0.1'
+    - '::1'
+  no_log: true
+
+- name: Remove test database
+  mysql_db:
+    name: test
+    state: absent
+    login_user: root
+    login_password: "{{ mysql_root_password }}"
+  no_log: true
+
+- name: Reload privilege tables
+  mysql_query:
+    login_user: root
+    login_password: "{{ mysql_root_password }}"
+    query: 'FLUSH PRIVILEGES'
+  no_log: true
+
 - name: Add HAproxy user
   mysql_user:
     name: "{{ HAPROXY_USER }}"
     host: "{{ HAPROXY_IP }}"
     state: present
-  
+    login_user: root
+    login_password: "{{ mysql_root_password }}"
+  become: true
+
 - name: Set MySQL Error Log Location
   ini_file:
     path: "/etc/my.cnf" 
@@ -39,10 +88,3 @@
     line: '!includedir /etc/my.cnf.d/'
     insertafter: '^\\[mysqld\\]'  # Add after [mysqld] section
     state: present
-
-- name: Ensure MySQL packages are installed.
-  ini_file:
-    path: "/etc/my.cnf" 
-    section: mysqld
-    option: log_error
-    value: "{{ mysql_error_log_path }}"

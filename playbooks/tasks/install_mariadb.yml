@@ -1,46 +1,58 @@
 ---
-- name: Add MariaDB repository on Debian
-  apt_repository:
-    repo: 'deb [arch=amd64,arm64,ppc64el] http://mariadb.mirror.globo.tech/repo/10.6/ubuntu {{ ansible_distribution_release }} main'
+- name: Ensure PyMySQL is installed
+  become: true
+  pip:
+    name: pymysql 
     state: present
-  when: ansible_os_family == "Debian"
 
-- name: Add MariaDB repository key on Debian
-  apt_key:
-    url: 'https://mariadb.org/mariadb_release_signing_key.asc'
-    state: present
-  when: ansible_os_family == "Debian"
+# - name: Add MariaDB repository on Debian
+#   apt_repository:
+#     repo: 'deb [arch=amd64,arm64,ppc64el] http://mariadb.mirror.globo.tech/repo/10.6/ubuntu {{ ansible_distribution_release }} main'
+#     state: present
+#   when: ansible_os_family == "Debian"
 
-- name: Ensure /var/lib/mysql exists
-  ansible.builtin.file:
-    path: /var/lib/mysql
-    state: directory
-    mode: '0755'
+# - name: Add MariaDB repository key on Debian
+#   apt_key:
+#     url: 'https://mariadb.org/mariadb_release_signing_key.asc'
+#     state: present
+#   when: ansible_os_family == "Debian"
 
-- name: Add MariaDB repository on RedHat
-  yum_repository:
-    name: MariaDB
-    description: "MariaDB Repository"
-    baseurl: 'http://yum.mariadb.org/10.6/rhel{{ ansible_distribution_major_version }}-amd64'
-    gpgkey: 'https://mariadb.org/mariadb_release_signing_key.asc'
-    gpgcheck: yes
-    enabled: yes
-  when: ansible_os_family == "RedHat"
+# - name: Ensure /var/lib/mysql exists
+#   ansible.builtin.file:
+#     path: /var/lib/mysql
+#     state: directory
+#     mode: '0755'
 
-- name: Update apt cache on Debian
-  apt:
-    update_cache: yes
-  when: ansible_os_family == "Debian"
+# - name: Add MariaDB repository on RedHat
+#   yum_repository:
+#     name: MariaDB
+#     description: "MariaDB Repository"
+#     baseurl: 'http://yum.mariadb.org/10.6/rhel{{ ansible_distribution_major_version }}-amd64'
+#     gpgkey: 'https://mariadb.org/mariadb_release_signing_key.asc'
+#     gpgcheck: yes
+#     enabled: yes
+#   when: ansible_os_family == "RedHat"
 
-- name: Install MariaDB server on Debian
-  apt:
-    name: mariadb-server
-    state: present
-  when: ansible_os_family == "Debian"
+# - name: Update apt cache on Debian
+#   apt:
+#     update_cache: yes
+#   when: ansible_os_family == "Debian"
+
+# - name: Install MariaDB server on Debian
+#   apt:
+#     name: mariadb-server
+#     state: present
+#   when: ansible_os_family == "Debian"
 
 - name: Install MariaDB server on RedHat
   yum:
-    name: mariadb-server
+    name: mariadb-server-galera
     state: present
   when: ansible_os_family == "RedHat"
 
+- name: Start MariaDB for Securing
+  service:
+    name: mariadb
+    state: started
+    enabled: yes
+  become: true

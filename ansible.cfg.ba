@@ -33,5 +33,3 @@ pipelining = True
 
 # Increase SSH timeout to 30 seconds
 timeout = 30
-
-ansible_python_interpreter=/usr/bin/python3

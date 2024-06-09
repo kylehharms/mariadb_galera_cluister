@@ -1,7 +1,8 @@
+---
 - name: Create Galera Configuration
   template:
     src: my.cnf.j2
-    dest: /etc/my.cnf.d/server.cnf
+    dest: /etc/my.cnf.d/galera.cnf
     owner: root
     group: root
     mode: 0644
@@ -13,9 +14,10 @@
   register: all_stop
 
 - name: Start Galera Cluster on Node 1
-  command: galera_new_cluster
+  command: sudo galera_new_cluster
   when: inventory_hostname == NODE1_NAME and all_stop is succeeded
   register: galera_result
+  become: true
 
 - name: Wait for Galera Cluster Initialization
   wait_for:
